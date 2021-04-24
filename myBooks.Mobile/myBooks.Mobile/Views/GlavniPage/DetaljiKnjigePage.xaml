@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:myBooks.Mobile.ViewModels"
+             xmlns:converters="clr-namespace:myBooks.Mobile.Converters"
+             x:Class="myBooks.Mobile.Views.GlavniPage.DetaljiKnjigePage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ImageConverter x:Key="imgConv"></converters:ImageConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Padding="30" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <Grid HorizontalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Column="0" Orientation="Vertical">
+                    <Image Source="{Binding Knjiga.NaslovnaFotografija, Converter={StaticResource imgConv}}" Margin="0,0,0,20"></Image>
+
+                    <StackLayout Margin="0,0,0,20" IsVisible="{Binding ImaProsjecnuOcjenu}">
+                        <Label Text="Prosječna ocjena" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="13" HorizontalOptions="Center" />
+                        <Label Text="{Binding ProsjecnaOcjena}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="20" HorizontalOptions="Center" />
+                    </StackLayout>
+
+                    <StackLayout Margin="0,0,0,20" IsVisible="{Binding ImaPolicu}">
+                        <Label Text="Polica" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="13" HorizontalOptions="Center" />
+                        <Label Text="{Binding NazivPolice}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="20" HorizontalOptions="Center" />
+                    </StackLayout>
+
+                    <Label IsVisible="{Binding KnjigaProcitana}" Text="Pročitano" TextColor="Green" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="20" HorizontalOptions="Center" Margin="0,0,0,20" />
+
+                    <Button Text="Dodaj u policu" Clicked="DodajUPolicu_Clicked" HorizontalOptions="FillAndExpand" IsVisible="{Binding MozeDodatiKnjiguUPolicu}"></Button>
+                    <Button Text="Dodaj recenziju" Clicked="KreirajRecenziju_Clicked" HorizontalOptions="FillAndExpand" IsVisible="{Binding MozeDodatiRecenziju}"></Button>
+                    <Button Text="Ocijeni" Clicked="Ocijeni_Clicked" HorizontalOptions="FillAndExpand" IsVisible="{Binding MozeDatiOcjenu}"></Button>
+                    <Button Text="Promijeni policu" Clicked="PromijeniPolicu_Clicked" HorizontalOptions="FillAndExpand" IsVisible="{Binding MozePromijenitiPolicu}"></Button>
+                    <Button Text="Označi kao pročitano" Clicked="OznaciKaoProcitano_Clicked" HorizontalOptions="FillAndExpand" IsVisible="{Binding MozeOznacitiKaoProcitano}" BackgroundColor="Green" TextColor="White"></Button>
+                    <Button Text="Obriši iz police" Clicked="ObrisiIzPolice_Clicked" HorizontalOptions="FillAndExpand" IsVisible="{Binding MozeObrisatiIzPolice}" BackgroundColor="Red" TextColor="White"></Button>
+                </StackLayout>
+                <ScrollView Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                        <Label Text="{Binding NazivAndISBN}" LineBreakMode="NoWrap" FontSize="Medium" FontAttributes="Bold" Margin="0,0,0,20" />
+
+                        <Label Text="Žanr" LineBreakMode="WordWrap" FontSize="Caption" Margin="0" />
+                        <Label Text="{Binding Knjiga.ZanrNaziv}" LineBreakMode="WordWrap" FontSize="Micro" FontAttributes="Bold"  Margin="0,0,0,10" />
+
+                        <Label Text="Jezik" LineBreakMode="WordWrap" FontSize="Caption" Margin="0" />
+                        <Label Text="{Binding Knjiga.JezikNaziv}" LineBreakMode="WordWrap" FontSize="Micro" FontAttributes="Bold" Margin="0,0,0,10" />
+
+                        <Label Text="Kratak opis" LineBreakMode="WordWrap" FontSize="Caption" Margin="0" />
+                        <Label Text="{Binding Knjiga.KratakOpis}" LineBreakMode="WordWrap" FontSize="Micro" FontAttributes="Bold" Margin="0,0,0,10" />
+
+                        <Label Text="Autori" LineBreakMode="WordWrap" FontSize="Caption" Margin="0" />
+                        <Label Text="{Binding Autori}" LineBreakMode="WordWrap" FontSize="Micro" FontAttributes="Bold" Margin="0,0,0,10" />
+
+                        <Label Text="Datum izdavanja" LineBreakMode="WordWrap" FontSize="Caption" Margin="0" />
+                        <Label Text="{Binding Knjiga.DatumIzdavanja, Mode=OneWay, StringFormat='{0:dd.MM.yyyy.}'}" LineBreakMode="WordWrap" FontSize="Micro" FontAttributes="Bold" Margin="0,0,0,10" />
+
+                        <Label Text="Izdavačka kuća" LineBreakMode="WordWrap" FontSize="Caption" Margin="0" />
+                        <Label Text="{Binding Knjiga.IzdavackaKucaNaziv}" LineBreakMode="WordWrap" FontSize="Micro" FontAttributes="Bold" Margin="0,0,0,20" />
+
+                        <Label Text="Opis" LineBreakMode="WordWrap" FontSize="Caption" Margin="0" />
+                        <Label Text="{Binding Knjiga.Opis}" LineBreakMode="WordWrap" FontSize="Micro" FontAttributes="Bold" Margin="0,0,0,20" />
+
+                        <Label Text="Recenzije" LineBreakMode="NoWrap" FontSize="Medium" />
+                        <Label IsVisible="{Binding IsRecenzijeEmpty}" Text="Nema recenzija za prikaz" HorizontalOptions="Center" VerticalOptions="Center" FontSize="18" Margin="0,20,0,0"></Label>
+                        <FlexLayout BindableLayout.ItemsSource="{Binding Recenzije}" HorizontalOptions="FillAndExpand" Direction="Row" AlignItems="Start" Wrap="Wrap" JustifyContent="SpaceAround" AlignContent="SpaceAround">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame CornerRadius="0" 
+                                       HorizontalOptions="FillAndExpand" 
+                                       HasShadow="false"
+                                       IsClippedToBounds="True"
+                                       Padding="0"
+                                       BorderColor="#08FFFFFF">
+                                        <StackLayout Margin="15,10,15,15" Orientation="Vertical" HorizontalOptions="FillAndExpand" BackgroundColor="#80000000">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="100" />
+                                                </Grid.ColumnDefinitions>
+                                                <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand">
+                                                    <StackLayout Orientation="Horizontal" VerticalOptions="Center" Margin="0,0,0,5">
+                                                        <Label LineBreakMode="NoWrap" FontSize="18" Style="{DynamicResource ListItemTextStyle}">
+                                                            <MultiBinding StringFormat="{}{0:F1} {1:F1}">
+                                                                <Binding Path="Recenzija.Korisnik.Ime" />
+                                                                <Binding Path="Recenzija.Korisnik.Prezime" />
+                                                            </MultiBinding>
+                                                        </Label>
+                                                        <Label Text="{Binding Recenzija.DatumObjave, Mode=OneWay, StringFormat='{0:dd.MM.yyyy.}'}" LineBreakMode="WordWrap" FontSize="Caption" Margin="5,5,0,0" />
+                                                    </StackLayout>
+                                                    <Label Text="{Binding Recenzija.Sadrzaj}" LineBreakMode="WordWrap" FontSize="Subtitle" />
+                                                </StackLayout>
+                                                <StackLayout Grid.Column="1" VerticalOptions="Center">
+                                                    <Button HeightRequest="40" CommandParameter="{Binding .}" Clicked="ObrisiRecenziju_Clicked" Text="Obriši" BackgroundColor="Red" TextColor="White" IsVisible="{Binding MozeObrisati}"></Button>
+                                                </StackLayout>
+                                            </Grid>
+                                        </StackLayout>
+                                    </Frame>
+
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </FlexLayout>
+
+                        <Label Text="Preporučene knjige" LineBreakMode="NoWrap" FontSize="Medium" Margin="0,20,0,0" />
+                        <Label IsVisible="{Binding IsPreporuceneKnjigeEmpty}" Text="Nema preporučenih knjiga za prikaz" HorizontalOptions="Center" VerticalOptions="Center" FontSize="18" Margin="0,20,0,20"></Label>
+                        <FlexLayout  BindableLayout.ItemsSource="{Binding PreporuceneKnjige}" HorizontalOptions="FillAndExpand" Direction="Row" AlignItems="Start" Wrap="Wrap" JustifyContent="SpaceAround" AlignContent="SpaceAround">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame CornerRadius="0" 
+                                       HorizontalOptions="FillAndExpand" 
+                                       HasShadow="false"
+                                       IsClippedToBounds="True"
+                                       Padding="0"
+                                       BorderColor="#08FFFFFF">
+                                        <StackLayout Margin="15" Orientation="Vertical" HorizontalOptions="FillAndExpand" BackgroundColor="#80000000">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="80" />
+                                                    <ColumnDefinition Width="10" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="100" />
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Column="0" Source="{Binding NaslovnaFotografija, Converter={StaticResource imgConv}}"></Image>
+                                                <StackLayout Grid.Column="2" Grid.Row="0" Orientation="Vertical">
+                                                    <Label Text="{Binding Naziv}" LineBreakMode="NoWrap" FontSize="Medium" FontAttributes="Bold" />
+                                                    <Label Text="{Binding KratakOpis}" LineBreakMode="WordWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" Margin="0,0,0,10" />
+                                                </StackLayout>
+                                                <StackLayout Grid.Column="3" VerticalOptions="Center">
+                                                    <Button HeightRequest="40" CommandParameter="{Binding .}" Clicked="Detalji_Clicked" Text="Detalji"></Button>
+                                                </StackLayout>
+                                            </Grid>
+                                        </StackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </FlexLayout>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

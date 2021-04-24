@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:myBooks.Mobile.ViewModels"
+             x:Class="myBooks.Mobile.Views.GlavniPage.NovaPolicaPage">
+    <ContentPage.BindingContext>
+        <vm:NovaPolicaViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="30">
+            <Label Text="Naziv" FontSize="Medium"></Label>
+            <Entry x:Name="Naziv" Text="{Binding Naziv}" Margin="0,0,0,15" />
+
+            <StackLayout Orientation="Horizontal" Margin="0,0,0,15">
+                <Label Text="Želim pročitati" FontSize="Medium"></Label>
+                <Entry x:Name="CiljniBroj" Text="{Binding CiljniBroj}" Placeholder="broj" Keyboard="Numeric" WidthRequest="100" Margin="10,0,10,0" />
+                <Label Text="knjiga do" FontSize="Medium"></Label>
+                <DatePicker x:Name="KrajnjiDatumCilja" Date="{Binding KrajnjiDatumCilja}" Margin="10,0,0,0"></DatePicker>
+            </StackLayout>
+
+            <Button Text="Kreiraj" Clicked="Kreiraj_Clicked" HorizontalOptions="FillAndExpand"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

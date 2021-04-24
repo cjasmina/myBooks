@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="myBooks.Mobile.Views.RegistracijaPage">
+    <ContentPage.Content>
+        <ScrollView VerticalOptions="CenterAndExpand">
+            <StackLayout HorizontalOptions="FillAndExpand" Padding="30" VerticalOptions="Center">
+                <Label HorizontalOptions="Center"
+                       Text="myBooks"
+                       FontSize="30"
+                       Margin="0,0,0,30"></Label>
+                
+                <Label Text="Ime"></Label>
+                <Entry x:Name="Ime" Text="{ Binding Ime}" Placeholder="Unesite ime" Margin="0,0,0,15"></Entry>
+
+                <Label Text="Prezime"></Label>
+                <Entry x:Name="Prezime" Text="{ Binding Prezime}" Placeholder="Unesite prezime" Margin="0,0,0,15"></Entry>
+                
+                <Label Text="Datum rođenja"></Label>
+                <DatePicker x:Name="DatumRodjenja" Date="{Binding DatumRodjenja}" Margin="0,0,0,15"></DatePicker>
+                
+                <Label Text="Email"></Label>
+                <Entry x:Name="Email" Text="{ Binding Email}" Placeholder="Unesite email" Margin="0,0,0,15"></Entry>
+
+                <Label Text="Telefon"></Label>
+                <Entry x:Name="Telefon" Text="{ Binding Telefon}" Placeholder="Unesite broj telefona" Margin="0,0,0,15"></Entry>
+
+                <Label Text="Korisničko ime"></Label>
+                <Entry x:Name="KorisnickoIme" Text="{Binding KorisnickoIme}" Placeholder="Unesite korisničko ime" Margin="0,0,0,15"></Entry>
+
+                <Label Text="Lozinka"></Label>
+                <Entry x:Name="Lozinka" Text="{Binding Lozinka}" IsPassword="True" Placeholder="Unesite lozinku" Margin="0,0,0,15"></Entry>
+
+                <Label Text="Potvrda lozinke"></Label>
+                <Entry x:Name="PotvrdaLozinke" Text="{Binding PotvrdaLozinke}" IsPassword="True" Placeholder="Potvrdite lozinku" Margin="0,0,0,30"></Entry>
+
+                <Button IsEnabled="{Binding IsNotBusy}" Text="Registruj se" Clicked="RegistracijaButton_Clicked" HorizontalOptions="FillAndExpand"></Button>
+                <Button IsEnabled="{Binding IsNotBusy}" Text="Prijavi se" Clicked="PrijavaButton_Clicked" HorizontalOptions="FillAndExpand"></Button>
+
+                <Label IsVisible="{Binding IsBusy}" Text="Učitavam..." HorizontalOptions="Center" FontSize="14" Margin="0,30,0,0"></Label>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

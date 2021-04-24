@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsKnjigeOcjene_najbolje" targetNamespace="http://tempuri.org/dsKnjigeOcjene_najbolje.xsd" xmlns:mstns="http://tempuri.org/dsKnjigeOcjene_najbolje.xsd" xmlns="http://tempuri.org/dsKnjigeOcjene_najbolje.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="myBooksConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="myBooksConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.myBooks.Desktop.Properties.Settings.GlobalReference.Default.myBooksConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="KnjigeTableAdapter" GeneratorDataComponentClassName="KnjigeTableAdapter" Name="Knjige" UserDataComponentName="KnjigeTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="myBooksConnectionString (Settings)" DbObjectName="myBooks.dbo.Knjige" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Knjige.Naziv, AVG(Ocjene.Ocjena) AS ProsjecnaOcjena
+FROM   Knjige INNER JOIN
+           Ocjene ON Knjige.KnjigaId = Ocjene.KnjigaId
+GROUP BY Knjige.Naziv
+HAVING AVG(Ocjene.Ocjena) &gt; 3
+ORDER BY ProsjecnaOcjena DESC</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Naziv" DataSetColumn="Naziv" />
+              <Mapping SourceColumn="ProsjecnaOcjena" DataSetColumn="ProsjecnaOcjena" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsKnjigeOcjene_najbolje" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsKnjigeOcjene_najbolje" msprop:Generator_UserDSName="dsKnjigeOcjene_najbolje">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Knjige" msprop:Generator_TableClassName="KnjigeDataTable" msprop:Generator_TableVarName="tableKnjige" msprop:Generator_TablePropName="Knjige" msprop:Generator_RowDeletingName="KnjigeRowDeleting" msprop:Generator_RowChangingName="KnjigeRowChanging" msprop:Generator_RowEvHandlerName="KnjigeRowChangeEventHandler" msprop:Generator_RowDeletedName="KnjigeRowDeleted" msprop:Generator_UserTableName="Knjige" msprop:Generator_RowChangedName="KnjigeRowChanged" msprop:Generator_RowEvArgName="KnjigeRowChangeEvent" msprop:Generator_RowClassName="KnjigeRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Naziv" msprop:Generator_ColumnVarNameInTable="columnNaziv" msprop:Generator_ColumnPropNameInRow="Naziv" msprop:Generator_ColumnPropNameInTable="NazivColumn" msprop:Generator_UserColumnName="Naziv">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ProsjecnaOcjena" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnProsjecnaOcjena" msprop:Generator_ColumnPropNameInRow="ProsjecnaOcjena" msprop:Generator_ColumnPropNameInTable="ProsjecnaOcjenaColumn" msprop:Generator_UserColumnName="ProsjecnaOcjena" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

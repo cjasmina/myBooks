@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:myBooks.Mobile.ViewModels"
+             x:Class="myBooks.Mobile.Views.GlavniPage.PolicePage">
+    <ContentPage.BindingContext>
+        <vm:PoliceViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="30">
+            <SearchBar Placeholder="Naziv" Text="{Binding Naziv}"></SearchBar>
+            <Button Text="Pretraži" Command="{Binding BindCommand}" Margin="0,0,0,20"></Button>
+
+            <Label IsVisible="{Binding IsEmpty}" Text="Nema polica za prikaz" HorizontalOptions="Center" VerticalOptions="Center" FontSize="18" Margin="0,0,0,20"></Label>
+
+            <ListView ItemsSource="{Binding Police}" ItemSelected="ListView_ItemSelected"  Margin="0,0,0,30">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10" VerticalOptions="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="100" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Margin="0,0,0,5">
+                                    <Label Text="{Binding Polica.Naziv}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding BrojKnjiga}" FontSize="Caption" />
+                                        <Label Text="|" LineBreakMode="NoWrap" FontSize="Caption" Margin="2,0,2,0" />
+                                        <Label Text="{Binding Cilj}" LineBreakMode="NoWrap" FontSize="Caption" />
+
+                                        <StackLayout Orientation="Horizontal" Margin="2,0,0,0" IsVisible="{Binding CiljIspunjen}">
+                                            <Label Text="|" LineBreakMode="NoWrap" FontSize="Caption" Margin="2,0,2,0" />
+                                            <Label Text="CILJ ISPUNJEN" LineBreakMode="NoWrap" FontAttributes="Bold" TextColor="Green" FontSize="Caption" Margin="2,0,0,0" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                                <Button Grid.Column="2" CommandParameter="{Binding Polica}" Command="{Binding ObrisiCommand}" Clicked="Obrisi_Clicked" Text="Obriši" BackgroundColor="Red" TextColor="White"></Button>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button Text="Kreiraj" Clicked="Kreiraj_Clicked" HorizontalOptions="FillAndExpand"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

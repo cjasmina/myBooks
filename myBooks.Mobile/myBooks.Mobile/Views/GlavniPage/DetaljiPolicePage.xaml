@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:myBooks.Mobile.ViewModels"
+             xmlns:converters="clr-namespace:myBooks.Mobile.Converters"
+             x:Class="myBooks.Mobile.Views.GlavniPage.DetaljiPolicePage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ImageConverter x:Key="imgConv"></converters:ImageConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Padding="30" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Label IsVisible="{Binding IsEmpty}" Text="Nema knjiga za prikaz" HorizontalOptions="Center" VerticalOptions="Center" FontSize="18"></Label>
+            
+            <ListView ItemsSource="{Binding Knjige}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Margin="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="100" />
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Source="{Binding NaslovnaFotografija, Converter={StaticResource imgConv}}"></Image>
+                                <StackLayout Grid.Column="2" Orientation="Vertical">
+                                    <Label Text="{Binding Naziv}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}"  FontSize="16" />
+                                    <Label Text="{Binding KratakOpis}" LineBreakMode="WordWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" />
+                                </StackLayout>
+                                <StackLayout Grid.Column="3" VerticalOptions="Center">
+                                    <Button CommandParameter="{Binding .}" Clicked="Obrisi_Clicked" Text="Obriši" BackgroundColor="Red" TextColor="White"></Button>
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

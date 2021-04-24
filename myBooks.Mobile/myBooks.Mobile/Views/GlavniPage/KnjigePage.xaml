@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:myBooks.Mobile.ViewModels"
+             xmlns:converters="clr-namespace:myBooks.Mobile.Converters"
+             x:Class="myBooks.Mobile.Views.GlavniPage.KnjigePage">
+    <ContentPage.BindingContext>
+        <vm:KnjigeViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ImageConverter x:Key="imgConv"></converters:ImageConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Padding="30" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+            <SearchBar Placeholder="Naziv" Text="{Binding Naziv}"></SearchBar>
+            <Picker ItemsSource="{Binding Zanrovi}" ItemDisplayBinding="{Binding Naziv}" SelectedItem="{Binding OdabraniZanr}"></Picker>
+            <Picker ItemsSource="{Binding Autori}" ItemDisplayBinding="{Binding Naziv}" SelectedItem="{Binding OdabraniAutor}"></Picker>
+            <Picker ItemsSource="{Binding Jezici}" ItemDisplayBinding="{Binding Naziv}" SelectedItem="{Binding OdabraniJezik}"></Picker>
+            <Button Text="Pretraži" Command="{Binding BindCommand}" Margin="0,0,0,20"></Button>
+
+            <Label IsVisible="{Binding IsEmpty}" Text="Nema knjiga za prikaz" HorizontalOptions="Center" VerticalOptions="Center" FontSize="18" Margin="0,0,0,20"></Label>
+
+            <ListView ItemsSource="{Binding Knjige}" ItemSelected="ListView_ItemSelected" HorizontalOptions="FillAndExpand">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Margin="10,10,0,10" HorizontalOptions="FillAndExpand">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="100" />
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Source="{Binding NaslovnaFotografija, Converter={StaticResource imgConv}}"></Image>
+                                <StackLayout Grid.Column="2" Orientation="Vertical">
+                                    <Label Text="{Binding Naziv}" LineBreakMode="NoWrap" FontSize="Medium" FontAttributes="Bold"/>
+                                    <Label Text="{Binding KratakOpis}" LineBreakMode="WordWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" Margin="0,0,0,10" />
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,9 @@
+Desktop:
+Korisničko ime: administrator1
+Lozinka: test
+
+Mobile
+Korisničko ime: korisnik1
+Lozinka: test
+Korisničko ime: korisnik2
+Lozinka: test

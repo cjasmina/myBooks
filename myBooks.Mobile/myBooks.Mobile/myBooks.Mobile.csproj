@@ -1,0 +1,80 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Flurl.Http" Version="3.0.1" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />  
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\myBooks.Model\myBooks.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\GlavniPage\DetaljiKnjigePage.xaml.cs">
+      <DependentUpon>DetaljiKnjigePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GlavniPage\DetaljiPolicePage.xaml.cs">
+      <DependentUpon>DetaljiPolicePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GlavniPage\NoviPrijedlogPage.xaml.cs">
+      <DependentUpon>NoviPrijedlogPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GlavniPage\PrijedloziPage.xaml.cs">
+      <DependentUpon>PrijedloziPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GlavniPage\NovaKnjigaPage.xaml.cs">
+      <DependentUpon>NovaKnjigaPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GlavniPage\UredjivanjeProfila.xaml.cs">
+      <DependentUpon>UredjivanjeProfila.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GlavniPage\NovaKnjigaPage.xaml.cs">
+      <DependentUpon>NovaKnjigaPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GlavniPage\KnjigePage.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GlavniPage\NovaOcjena.xaml.cs">
+      <DependentUpon>NovaOcjena.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GlavniPage\NovaRecenzija.xaml.cs">
+      <DependentUpon>NovaRecenzija.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\GlavniPage\DetaljiKnjigePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\GlavniPage\DetaljiPolicePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\GlavniPage\NovaKnjigaPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\GlavniPage\GlavniPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\GlavniPage\GlavniPageFlyout.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\GlavniPage\NovaPolicaPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\GlavniPage\PolicePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PrijavaPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\RegistracijaPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

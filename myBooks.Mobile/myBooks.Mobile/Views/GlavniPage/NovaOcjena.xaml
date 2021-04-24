@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:myBooks.Mobile.ViewModels"
+             x:Class="myBooks.Mobile.Views.GlavniPage.NovaOcjenaPage">
+    <ContentPage.BindingContext>
+        <vm:NovaOcjenaViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="30">
+            <Label Text="Ocjena" FontSize="Medium"></Label>
+            <Picker x:Name="Ocjena" SelectedItem="5" Margin="0,0,0,30" HorizontalOptions="FillAndExpand">
+                <Picker.Items>
+                    <x:String>1</x:String>
+                    <x:String>2</x:String>
+                    <x:String>3</x:String>
+                    <x:String>4</x:String>
+                    <x:String>5</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Button Text="Kreiraj" Clicked="Kreiraj_Clicked" HorizontalOptions="FillAndExpand"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

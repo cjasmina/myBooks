@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:myBooks.Mobile.ViewModels"
+             x:Class="myBooks.Mobile.Views.GlavniPage.PrijedloziPage">
+    <ContentPage.BindingContext>
+        <vm:PrijedloziViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="30">
+            <SearchBar Placeholder="Naziv" Text="{Binding Naziv}"></SearchBar>
+            <SearchBar Placeholder="Autor" Text="{Binding Autor}"></SearchBar>
+            <Button Text="Pretraži" Command="{Binding BindCommand}" Margin="0,0,0,20"></Button>
+
+            <Label IsVisible="{Binding IsEmpty}" Text="Nema prijedloga za prikaz" HorizontalOptions="Center" VerticalOptions="Center" FontSize="18" Margin="0,0,0,20"></Label>
+
+            <ListView ItemsSource="{Binding Prijedlozi}" Margin="0,0,0,30">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="100" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand">
+                                    <Label LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16">
+                                        <MultiBinding StringFormat="{}{0:F1} ({1:F1})">
+                                            <Binding Path="Naziv" />
+                                            <Binding Path="Autor" />
+                                        </MultiBinding>
+                                    </Label>
+                                    <Label Text="{Binding Datum, Mode=OneWay, StringFormat='{0:dd.MM.yyyy.}'}" LineBreakMode="NoWrap" FontSize="Caption" />
+                                </StackLayout>
+                                <Button Grid.Column="2" CommandParameter="{Binding .}" Command="{Binding ObrisiCommand}" Clicked="Obrisi_Clicked" Text="Obriši" BackgroundColor="Red" TextColor="White"></Button>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button Text="Kreiraj" Clicked="Kreiraj_Clicked" HorizontalOptions="FillAndExpand"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

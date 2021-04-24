@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Helpers\Knjige\biljeznica.jpg" />
+    <None Remove="Helpers\Knjige\kafka_na_obali_mora.jpg" />
+    <None Remove="Helpers\Knjige\na_prvi_pogled.jpg" />
+    <None Remove="Helpers\Knjige\neocekivani_gost.jpg" />
+    <None Remove="Helpers\Knjige\norveska_suma.jpg" />
+    <None Remove="Helpers\Knjige\paukova_mreza.jpg" />
+    <None Remove="Helpers\Knjige\setnja_za_pamcenje.jpg" />
+    <None Remove="Helpers\Knjige\stranac.jpg" />
+    <None Remove="Helpers\Knjige\ubistvo_u_orijent_ekspresu.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Helpers\Knjige\biljeznica.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Helpers\Knjige\kafka_na_obali_mora.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Helpers\Knjige\na_prvi_pogled.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Helpers\Knjige\neocekivani_gost.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Helpers\Knjige\norveska_suma.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Helpers\Knjige\paukova_mreza.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Helpers\Knjige\setnja_za_pamcenje.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Helpers\Knjige\stranac.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Helpers\Knjige\ubistvo_u_orijent_ekspresu.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\myBooks.Model\myBooks.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+</Project>
