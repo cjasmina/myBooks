@@ -46,7 +46,7 @@ namespace myBooks.Mobile.ViewModels
 
         public async Task Obrisi(Knjige knjiga)
         {
-            await _policeKnjigeService.DeleteActionWithRequest<PoliceKnjige>("Obrisi", new PoliceKnjigeDeleteRequest
+            await _policeKnjigeService.DeleteWithRequest<PoliceKnjige>(new PoliceKnjigeDeleteRequest
             {
                 KnjigaId = knjiga.KnjigaId,
                 PolicaId = _polica.PolicaId

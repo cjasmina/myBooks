@@ -1,11 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 using AutoMapper;
 
 using myBooks.API.Database;
 using myBooks.Model.Requests;
-using System;
 
 namespace myBooks.API.Services
 {
@@ -13,11 +13,6 @@ namespace myBooks.API.Services
     {
         public KorisniciService(myBooksContext database, IMapper mapper) : base(database, mapper)
         {
-        }
-
-        public Korisnici GetPrijavljeniKorisnik(KorisniciPrijavaRequest prijava)
-        {
-            return _databaseContext.Korisnici.FirstOrDefault(k => k.KorisnickoIme == prijava.KorisnickoIme && k.Uloga == prijava.Uloga);
         }
 
         public override List<Model.Korisnici> Get(KorisniciSearchRequest search)

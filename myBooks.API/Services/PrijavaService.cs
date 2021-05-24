@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
@@ -6,9 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 
 using myBooks.Model;
-using myBooks.API.Helpers;
 using myBooks.API.Database;
-using System;
 
 namespace myBooks.API.Services
 {

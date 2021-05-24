@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq;
+
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
-using myBooks.API.Database;
 using myBooks.API.Services;
 using myBooks.Model.Requests;
 
@@ -14,18 +15,24 @@ namespace myBooks.API.Controllers
 
         }
 
-        [Authorize]
         [HttpGet("Prijava")]
-        public ActionResult<Korisnici> GetPrijavljeniKorisnik([FromQuery] KorisniciPrijavaRequest request)
+        [Authorize(Roles = "Administrator,Korisnik")]
+        public ActionResult<Model.Korisnici> GetPrijavljeniKorisnik()
         {
-            return (Service as KorisniciService).GetPrijavljeniKorisnik(request);
+            return Ok((Service as KorisniciService).GetById(int.Parse(User.Claims.First(c => c.Type == "Id").Value)));
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public new Model.Korisnici Insert(KorisniciUpsertRequest request)
         {
             return Service.Insert(request);
+        }
+
+        [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator,Korisnik")]
+        public override Model.Korisnici Update(int id, KorisniciUpsertRequest request)
+        {
+            return base.Update(id, request);
         }
     }
 }

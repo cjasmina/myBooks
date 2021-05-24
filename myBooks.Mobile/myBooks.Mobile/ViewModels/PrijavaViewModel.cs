@@ -30,11 +30,7 @@ namespace myBooks.Mobile.ViewModels
             ApiService.KorisnickoIme = KorisnickoIme;
             ApiService.Lozinka = Lozinka;
 
-            return _apiService.GetAction<Korisnici>("Prijava", new KorisniciPrijavaRequest
-            {
-                KorisnickoIme = KorisnickoIme,
-                Uloga = Uloge.Korisnik
-            });
+            return _apiService.GetAction<Korisnici>("Prijava");
         }
 
         private string _korisnickoIme = string.Empty;

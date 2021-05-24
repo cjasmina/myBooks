@@ -65,6 +65,10 @@ namespace myBooks.Mobile.Views
                 {
                     await DisplayAlert("myBooks", "Korisničko ime i/ili lozinka nisu ispravni.", "Zatvori");
                 }
+                else if (ex.Call.Response.StatusCode == (int)System.Net.HttpStatusCode.Forbidden)
+                {
+                    await DisplayAlert("myBooks", "Pristup odbijen.", "Zatvori");
+                }
                 else
                 {
                     await DisplayAlert("myBooks", "Dogodila se greška prilikom registracije. Molimo pokušajte ponovo.", "Zatvori");

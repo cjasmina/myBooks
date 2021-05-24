@@ -7,7 +7,6 @@ using myBooks.API.Services;
 
 namespace myBooks.API.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class BaseController<T, TSearch> : ControllerBase
@@ -20,13 +19,15 @@ namespace myBooks.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<T>> Get([FromQuery] TSearch search)
+        [Authorize(Roles = "Administrator")]
+        public virtual ActionResult<List<T>> Get([FromQuery] TSearch search)
         {
             return Service.Get(search);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<T> GetById(int id)
+        [Authorize(Roles = "Administrator")]
+        public virtual ActionResult<T> GetById(int id)
         {
             return Service.GetById(id);
         }

@@ -5,7 +5,6 @@ using myBooks.API.Services;
 
 namespace myBooks.API.Controllers
 {
-    [Authorize]
     public class BaseCrudController<T, TSearch, TInsert, TUpdate> : BaseController<T, TSearch>
     {
         protected new readonly IBaseCrudService<T, TSearch, TInsert, TUpdate> Service;
@@ -16,19 +15,22 @@ namespace myBooks.API.Controllers
         }
 
         [HttpPost]
-        public T Insert(TInsert request)
+        [Authorize(Roles = "Administrator")]
+        public virtual T Insert(TInsert request)
         {
             return Service.Insert(request);
         }
 
         [HttpPut("{id}")]
-        public T Update(int id, TUpdate request)
+        [Authorize(Roles = "Administrator")]
+        public virtual T Update(int id, TUpdate request)
         {
             return Service.Update(id, request);
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        [Authorize(Roles = "Administrator")]
+        public virtual void Delete(int id)
         {
             Service.Delete(id);
         }

@@ -45,7 +45,7 @@ namespace myBooks.API.Security
 
                 var korisnickoIme = credentials[0];
                 var lozinka = credentials[1];
-
+                
                 prijavljeniKorisnik = await _prijavaService.Autentificiraj(korisnickoIme, lozinka);
             }
             catch
@@ -57,14 +57,16 @@ namespace myBooks.API.Security
                 return AuthenticateResult.Fail("Netačno korisničko ime i/ili lozinkaa");
 
             var claims = new List<Claim> {
+                new Claim("Id", prijavljeniKorisnik.KorisnikId.ToString()),
                 new Claim(ClaimTypes.NameIdentifier, prijavljeniKorisnik.KorisnickoIme),
                 new Claim(ClaimTypes.Name, prijavljeniKorisnik.Ime),
+                new Claim(ClaimTypes.Role, prijavljeniKorisnik.Uloga.ToString()),
             };
 
             var identity = new ClaimsIdentity(claims, Scheme.Name);
             var principal = new ClaimsPrincipal(identity);
             var ticket = new AuthenticationTicket(principal, Scheme.Name);
-
+            
             return AuthenticateResult.Success(ticket);
         }
     }

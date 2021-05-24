@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+
 using myBooks.API.Services;
 using myBooks.Model.Requests;
-using System.Collections.Generic;
 
 namespace myBooks.API.Controllers
 {
@@ -12,7 +15,15 @@ namespace myBooks.API.Controllers
 
         }
 
+        [HttpGet]
+        [Authorize(Roles = "Administrator,Korisnik")]
+        public override ActionResult<List<Model.Knjige>> Get([FromQuery] KnjigeSearchRequest search)
+        {
+            return base.Get(search);
+        }
+
         [HttpGet("PreporuciKnjige")]
+        [Authorize(Roles = "Administrator,Korisnik")]
         public List<Model.Knjige> PreporuciKnjige([FromQuery] KnjigeSearchRequest search)
         {
             return (Service as KnjigeService).PreporuciKnjige(search);
