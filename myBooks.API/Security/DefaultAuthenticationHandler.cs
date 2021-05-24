@@ -54,7 +54,7 @@ namespace myBooks.API.Security
             }
 
             if (prijavljeniKorisnik == null)
-                return AuthenticateResult.Fail("Netačno korisničko ime i/ili lozinkaa");
+                return AuthenticateResult.Fail("Netačno korisničko ime i/ili lozinka");
 
             var claims = new List<Claim> {
                 new Claim("Id", prijavljeniKorisnik.KorisnikId.ToString()),
